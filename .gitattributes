@@ -1,0 +1,36 @@
+# Enforce LF line endings across the entire repository.
+# Critical for cross-OS: authored on Windows 11, executed on Ubuntu (ArduPilot SITL + Gazebo Harmonic).
+* text=auto eol=lf
+
+# Explicitly normalize all source, script, config and data file types to LF.
+*.sh        text eol=lf
+*.py        text eol=lf
+*.sdf       text eol=lf
+*.world     text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+*.json      text eol=lf
+*.md        text eol=lf
+*.txt       text eol=lf
+*.ts        text eol=lf
+*.tsx       text eol=lf
+*.js        text eol=lf
+*.jsx       text eol=lf
+*.css       text eol=lf
+*.html      text eol=lf
+*.toml      text eol=lf
+*.cfg       text eol=lf
+*.mavlink   text eol=lf
+Dockerfile  text eol=lf
+Makefile    text eol=lf
+
+# Binary assets must never be normalized.
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.ico       binary
+*.glb       binary
+*.dae       binary
+*.stl       binary
+*.onnx      binary

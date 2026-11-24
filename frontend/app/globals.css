@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #050507;
+    --foreground: #f0f0f5;
+  }
+
+  * {
+    @apply border-nesfic-800;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-nesfic-950 text-nesfic-50 antialiased;
+    background-image: 
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 245, 212, 0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(255, 184, 0, 0.05), transparent);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-nesfic-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-nesfic-700 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-nesfic-600;
+  }
+}
+
+@layer components {
+  /* Glassmorphic card */
+  .glass-card {
+    @apply bg-glass-medium backdrop-blur-xl border border-glass-border rounded-2xl;
+    box-shadow: 
+      0 4px 24px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .glass-card-heavy {
+    @apply bg-glass-heavy backdrop-blur-2xl border border-glass-borderBright rounded-2xl;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  /* Glowing border on hover */
+  .glass-card:hover {
+    @apply border-glass-borderBright;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 0 24px rgba(0, 245, 212, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  /* Status indicator dots */
+  .status-dot {
+    @apply w-2.5 h-2.5 rounded-full;
+  }
+
+  .status-dot.connected {
+    @apply bg-accent-green;
+    box-shadow: 0 0 8px rgba(46, 213, 115, 0.6), 0 0 16px rgba(46, 213, 115, 0.3);
+  }
+
+  .status-dot.disconnected {
+    @apply bg-nesfic-500;
+  }
+
+  .status-dot.warning {
+    @apply bg-accent-amber;
+    box-shadow: 0 0 8px rgba(255, 184, 0, 0.6), 0 0 16px rgba(255, 184, 0, 0.3);
+  }
+
+  .status-dot.error {
+    @apply bg-accent-red;
+    box-shadow: 0 0 8px rgba(255, 71, 87, 0.6), 0 0 16px rgba(255, 71, 87, 0.3);
+  }
+
+  /* Button variants */
+  .btn-primary {
+    @apply px-6 py-3 bg-accent-cyan text-nesfic-950 font-semibold rounded-xl
+           hover:bg-opacity-90 active:bg-opacity-100 transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed
+           shadow-glow-cyan;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-glass-heavy text-nesfic-100 font-medium rounded-xl
+           border border-glass-border hover:border-glass-borderBright
+           hover:bg-glass-medium transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply px-6 py-3 bg-accent-red/20 text-accent-red font-semibold rounded-xl
+           border border-accent-red/30 hover:bg-accent-red/30
+           hover:border-accent-red/50 transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed
+           shadow-glow-red;
+  }
+
+  /* Input fields */
+  .input-field {
+    @apply w-full px-4 py-3 bg-nesfic-900/50 border border-glass-border
+           rounded-xl text-nesfic-50 placeholder-nesfic-600
+           focus:outline-none focus:border-accent-cyan focus:ring-2 focus:ring-accent-cyan/20
+           transition-all duration-200;
+  }
+
+  /* Metric value */
+  .metric-value {
+    @apply text-3xl font-mono font-bold tabular-nums;
+  }
+
+  .metric-label {
+    @apply text-xs text-nesfic-400 uppercase tracking-wider;
+  }
+
+  /* Grid background for map */
+  .map-grid {
+    background-image: 
+      linear-gradient(rgba(0, 245, 212, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 245, 212, 0.04) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Pulse animation for active elements */
+  .pulse-ring {
+    @apply absolute inset-0 rounded-full border-2 border-accent-cyan/30 animate-pulse-slow;
+  }
+
+  /* Telemetry panel */
+  .telemetry-panel {
+    @apply glass-card p-4 space-y-3;
+  }
+
+  .telemetry-row {
+    @apply flex justify-between items-center;
+  }
+
+  .telemetry-key {
+    @apply text-sm text-nesfic-400 font-mono;
+  }
+
+  .telemetry-val {
+    @apply text-lg font-mono font-semibold text-nesfic-100 tabular-nums;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-in {
+    animation: fadeIn 0.3s ease-out, slideUp 0.4s ease-out;
+  }
+
+  /* Hide scrollbar but keep scrolling */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  NESFIC-I-07: Tea Estate Dual-Drone Simulation World
+  Gazebo Harmonic (SDFormat 1.10) compatible
+  100m x 100m tea block, Dock Pad at (0,0,0.05), 3 infested patches
+  Scout UAV (iris_scout) at (-30, -30, 0.1), Sprayer UAV (iris_sprayer) at (30, -30, 0.1)
+-->
+<sdf version="1.10">
+  <world name="tea_estate_2drones">
+    <!-- ------------------------------------------------------------------ -->
+    <!-- Physics & Scene -->
+    <!-- ------------------------------------------------------------------ -->
+    <physics name="default_physics" default="true" type="ignition">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <gravity>0 0 -9.80665</gravity>
+      <constraints>
+        <cfm>0.0</cfm>
+        <erp>0.2</erp>
+        <contact_max_correcting_vel>100.0</contact_max_correcting_vel>
+        <contact_surface_layer>0.001</contact_surface_layer>
+      </constraints>
+    </physics>
+
+    <scene>
+      <ambient>0.4 0.4 0.4 1.0</ambient>
+      <background>0.6 0.7 0.8 1.0</background>
+      <shadows>true</shadows>
+      <grid>false</grid>
+      <origin_visual>false</origin_visual>
+    </scene>
+
+    <!-- ------------------------------------------------------------------ -->
+    <!-- Lighting: Sun for realistic shadows -->
+    <!-- ------------------------------------------------------------------ -->
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 100 0 0 0</pose>
+      <diffuse>0.9 0.9 0.85 1.0</diffuse>
+      <specular>0.3 0.3 0.3 1.0</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 -0.5 -0.7</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+
+    <!-- ------------------------------------------------------------------ -->
+    <!-- Ground Plane: 100m x 100m tea estate block -->
+    <!-- ------------------------------------------------------------------ -->
+    <model name="ground_plane">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+                <slip1>0.0</slip1>
+                <slip2>0.0</slip2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1000000</kp>
+                <kd>1000</kd>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ------------------------------------------------------------------ -->
+    <!-- Tea Estate Ground Texture (procedural green texture) -->
+    <!-- ------------------------------------------------------------------ -->
+    <model name="tea_estate_ground">
+      <static>true</static>
+      <pose>0 0 0.001 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.15 0.35 0.15 1.0</ambient>
+            <diffuse>0.2 0.5 0.2 1.0</diffuse>
+            <specular>0.05 0.05 0.05 1.0</specular>
+            <pbr>
+              <metal>
+                <albedo>0.2 0.5 0.2 1.0</albedo>
+                <roughness>0.9</roughness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ------------------------------------------------------------------ -->
+    <!-- Section A-14 Boundary Markers (60m x 60m survey area) -->
+    <!-- ------------------------------------------------------------------ -->
+    <model name="section_a14_boundary">
+      <static>true</static>
+      <pose>-30 -30 0.05 0 0 0</pose>
+      <link name="link">
+        <visual name="corner_nw">
+          <pose>-0.5 -0.5 0.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1.0 0.8 0.0 1.0</ambient>
+            <diffuse>1.0 0.8 0.0 1.0</diffuse>
+          </material>
+        </visual>
+        <visual name="corner_ne">
+          <pose>59.5 -0.5 0.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1.0 0.8 0.0 1.0</ambient>
+            <diffuse>1.0 0.8 0.0 1.0</diffuse>
+          </material>
+        </visual>
+        <visual name="corner_sw">
+          <pose>-0.5 59.5 0.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1.0 0.8 0.0 1.0</ambient>
+            <diffuse>1.0 0.8 0.0 1.0</diffuse>
+          </material>
+        </visual>
+        <visual name="corner_se">
+          <pose>59.5 59.5 0.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1.0 0.8 0.0 1.0</ambient>
+            <diffuse>1.0 0.8 0.0 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ------------------------------------------------------------------ -->
+    <!-- Infested Patches (3 patches within Section A-14) -->
+    <!-- These are visual markers; pest_detector.py reads these coordinates -->
+    <!-- ------------------------------------------------------------------ -->
+    <model name="infested_patch_1">
+      <static>true</static>
+      <pose>-10 -10 0.02 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>5</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.8 0.2 0.2 0.7</ambient>
+            <diffuse>0.9 0.1 0.1 0.7</diffuse>
+          </material>
+          <transparency>0.3</transparency>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>5</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name="infested_patch_2">
+      <static>true</static>
+      <pose>15 20 0.02 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>4</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.8 0.2 0.2 0.7</ambient>
+            <diffuse>0.9 0.1 0.1 0.7</diffuse>
+          </material>
+          <transparency>0.3</transparency>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>4</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name="infested_patch_3">
+      <static>true</static>
+      <pose>40 -20 0.02 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>6</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.8 0.2 0.2 0.7</ambient>
+            <diffuse>0.9 0.1 0.1 0.7</diffuse>
+          </material>
+          <transparency>0.3</transparency>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>6</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- ------------------------------------------------------------------ -->
+    <!-- Smart Dock Station at Local Origin (0, 0, 0) -->
+    <!-- Charging pad + chemical tanks + edge AI unit -->
+    <!-- ------------------------------------------------------------------ -->
+    <model name="smart_dock">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <link name="base_link">
+        <!-- Charging Pad -->
+        <visual name="charging_pad">
+          <pose>0 0 0.025 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.1 0.1 0.1 1.0</ambient>
+            <diffuse>0.2 0.2 0.2 1.0</diffuse>
+            <pbr>
+              <metal>
+                <albedo>0.2 0.2 0.2 1.0</albedo>
+                <roughness>0.3</roughness>
+                <metalness>0.8</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+
+        <!-- Dock Structure -->
+        <visual name="dock_structure">
+          <pose>0 0 1.0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3 3 2</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.3 0.3 0.35 1.0</ambient>
+            <diffuse>0.4 0.4 0.45 1.0</diffuse>
+          </material>
+        </visual>
+
+        <!-- Chemical Tank Array (visual only) -->
+        <visual name="tank_array">
+          <pose>2.5 0 1.2 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.4</radius>
+              <length>1.5</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.2 0.4 0.6 1.0</ambient>
+            <diffuse>0.3 0.5 0.7 1.0</diffuse>
+          </material>
+        </visual>
+
+        <visual name="tank_array_2">
+          <pose>-2.5 0 1.2 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.4</radius>
+              <length>1.5</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.6 0.3 0.2 1.0</ambient>
+            <diffuse>0.7 0.4 0.3 1.0</diffuse>
+          </material>
+        </visual>
+
+        <!-- Edge AI Unit -->
+        <visual name="edge_ai_unit">
+          <pose>0 2.2 1.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.6 0.4 0.3</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.1 0.1 0.15 1.0</ambient>
+            <diffuse>0.2 0.2 0.25 1.0</diffuse>
+          </material>
+        </visual>
+
+        <!-- Collision for dock -->
+        <collision name="collision">
+          <pose>0 0 1.0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3 3 2</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- ------------------------------------------------------------------ -->
+    <!-- Scout UAV (iris_scout) - spawned at (-30, -30, 0.1) -->
+    <!-- sysid=1, ArduPilot SITL instance -I 0, fdm_port_in=9002 -->
+    <!-- ------------------------------------------------------------------ -->
+    <model name="scout_uav">
+      <pose>-30 -30 0.1 0 0 0</pose>
+      <include>
+        <uri>model://iris_scout</uri>
+        <name>iris_scout</name>
+      </include>
+    </model>
+
+    <!-- ------------------------------------------------------------------ -->
+    <!-- Sprayer UAV (iris_sprayer) - spawned at (30, -30, 0.1) -->
+    <!-- sysid=2, ArduPilot SITL instance -I 1, fdm_port_in=9012 -->
+    <!-- ------------------------------------------------------------------ -->
+    <model name="sprayer_uav">
+      <pose>30 -30 0.1 0 0 0</pose>
+      <include>
+        <uri>model://iris_sprayer</uri>
+        <name>iris_sprayer</name>
+      </include>
+    </model>
+
+    <!-- ------------------------------------------------------------------ -->
+    <!-- Wind Plugin (optional, for realism) -->
+    <!-- ------------------------------------------------------------------ -->
+    <plugin filename="libgz-sim-wind-system.so" name="wind_system">
+      <wind>
+        <velocity>1.0 0.5 0.0</velocity>
+        <variance>0.2</variance>
+      </wind>
+    </plugin>
+
+  </world>
+</sdf>

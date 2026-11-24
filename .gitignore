@@ -1,0 +1,90 @@
+# Python virtual environments
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Node / Next.js
+node_modules/
+.npm/
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+.next/
+next-env.d.ts
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Local environment / secrets
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+secrets.json
+
+# Virtual / simulation artifacts
+*.log
+*.pid
+*.urdf.bak
+*.sdf.bak
+*.world.bak
+
+# Gazebo / ROS / ArduPilot runtime caches
+*.log
+*.core
+*.pid
+*.lock
+*.bak
+*.orig
+*.rej
+*.diff
+
+# Python / Jupyter
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp

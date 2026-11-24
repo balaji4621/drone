@@ -1,0 +1,3 @@
+# This file ensures the audit_logs directory is tracked by Git.
+# Audit records (JSON + CSV) will be written here at runtime by dock_engine.py
+# Do not commit actual audit logs - they are generated per simulation run.

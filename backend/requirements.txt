@@ -1,0 +1,27 @@
+# NESFIC-I-07 Backend Dependencies
+# Verified via Context7 for latest compatible versions
+
+# Core API
+fastapi==0.112.0
+uvicorn[standard]==0.30.6
+
+# MAVLink Communication
+pymavlink==2.4.31
+
+# Data Validation & Settings
+pydantic==2.8.2
+pydantic-settings==2.4.0
+
+# Numerical Computing
+numpy==1.26.4
+
+# ML Inference (ONNX Runtime for edge CV)
+onnxruntime==1.19.0
+
+# Async & Utilities
+python-multipart==0.0.9
+httpx==0.27.2
+pyyaml==6.0.1
+
+# Type Stubs (for development)
+types-pyyaml==6.0.12.20240311
