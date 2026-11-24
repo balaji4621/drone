@@ -7,9 +7,7 @@
 -->
 <sdf version="1.10">
   <world name="tea_estate_2drones">
-    <!-- ------------------------------------------------------------------ -->
     <!-- Physics & Scene -->
-    <!-- ------------------------------------------------------------------ -->
     <physics name="default_physics" default="true" type="ignition">
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1.0</real_time_factor>
@@ -31,9 +29,9 @@
       <origin_visual>false</origin_visual>
     </scene>
 
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <!-- Lighting: Sun for realistic shadows -->
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <light name="sun" type="directional">
       <cast_shadows>true</cast_shadows>
       <pose>0 0 100 0 0 0</pose>
@@ -53,9 +51,9 @@
       </spot>
     </light>
 
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <!-- Ground Plane: 100m x 100m tea estate block -->
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <model name="ground_plane">
       <static>true</static>
       <pose>0 0 0 0 0 0</pose>
@@ -101,9 +99,9 @@
       </link>
     </model>
 
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <!-- Tea Estate Ground Texture (procedural green texture) -->
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <model name="tea_estate_ground">
       <static>true</static>
       <pose>0 0 0.001 0 0 0</pose>
@@ -130,9 +128,9 @@
       </link>
     </model>
 
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <!-- Section A-14 Boundary Markers (60m x 60m survey area) -->
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <model name="section_a14_boundary">
       <static>true</static>
       <pose>-30 -30 0.05 0 0 0</pose>
@@ -188,10 +186,10 @@
       </link>
     </model>
 
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <!-- Infested Patches (3 patches within Section A-14) -->
     <!-- These are visual markers; pest_detector.py reads these coordinates -->
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <model name="infested_patch_1">
       <static>true</static>
       <pose>-10 -10 0.02 0 0 0</pose>
@@ -276,10 +274,10 @@
       </link>
     </model>
 
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <!-- Smart Dock Station at Local Origin (0, 0, 0) -->
     <!-- Charging pad + chemical tanks + edge AI unit -->
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <model name="smart_dock">
       <static>true</static>
       <pose>0 0 0 0 0 0</pose>
@@ -375,10 +373,10 @@
       </link>
     </model>
 
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <!-- Scout UAV (iris_scout) - spawned at (-30, -30, 0.1) -->
     <!-- sysid=1, ArduPilot SITL instance -I 0, fdm_port_in=9002 -->
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <model name="scout_uav">
       <pose>-30 -30 0.1 0 0 0</pose>
       <include>
@@ -387,10 +385,10 @@
       </include>
     </model>
 
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <!-- Sprayer UAV (iris_sprayer) - spawned at (30, -30, 0.1) -->
     <!-- sysid=2, ArduPilot SITL instance -I 1, fdm_port_in=9012 -->
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <model name="sprayer_uav">
       <pose>30 -30 0.1 0 0 0</pose>
       <include>
@@ -399,9 +397,9 @@
       </include>
     </model>
 
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <!-- Wind Plugin (optional, for realism) -->
-    <!-- ------------------------------------------------------------------ -->
+    <!-- Section divider -->
     <plugin filename="libgz-sim-wind-system.so" name="wind_system">
       <wind>
         <velocity>1.0 0.5 0.0</velocity>
