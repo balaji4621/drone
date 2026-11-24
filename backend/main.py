@@ -8,6 +8,7 @@ import asyncio
 import json
 import time
 from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import Optional
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException, Query
@@ -139,9 +140,11 @@ async def lifespan(app: FastAPI):
 
     _fleet.subscribe(on_telemetry)
 
-    # Connect to real SITL if not mock
+    # Connect to real SITL if not mock, or start mock loop
     if not _use_mock:
         await _fleet.connect()
+    else:
+        await _fleet.start_mock_loop()
 
     yield
 

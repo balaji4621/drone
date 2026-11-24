@@ -407,8 +407,11 @@ class SmartDockFSM:
 _dock_fsm: Optional[SmartDockFSM] = None
 
 
-def get_dock_fsm(days_to_harvest: int = 14, audit_dir: str = "audit_logs") -> SmartDockFSM:
+def get_dock_fsm(days_to_harvest: int = 14, audit_dir: str = "audit_logs", force_new: bool = False) -> SmartDockFSM:
     global _dock_fsm
-    if _dock_fsm is None:
+    if _dock_fsm is None or force_new:
+        _dock_fsm = SmartDockFSM(days_to_harvest=days_to_harvest, audit_dir=audit_dir)
+    elif _dock_fsm.days_to_harvest != days_to_harvest:
+        # Re-create with new days_to_harvest
         _dock_fsm = SmartDockFSM(days_to_harvest=days_to_harvest, audit_dir=audit_dir)
     return _dock_fsm

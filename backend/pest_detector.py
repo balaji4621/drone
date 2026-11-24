@@ -277,7 +277,7 @@ class PestDetectionService:
         self._survey_tiles = tiles
         return tiles
 
-    def cluster_hotspots(self, min_severity: float = 0.3, merge_radius_m: float = 8.0) -> list[InfestationHotspot]:
+    def cluster_hotspots(self, min_severity: float = 0.1, merge_radius_m: float = 8.0) -> list[InfestationHotspot]:
         """
         Cluster adjacent pest-detected tiles into hotspots.
         """

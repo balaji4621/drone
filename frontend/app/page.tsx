@@ -486,7 +486,7 @@ function MapView({ scoutTelemetry, sprayerTelemetry, hotspots, dockPosition }: {
   hotspots: Hotspot[];
   dockPosition: { lat: number; lon: number };
 }) {
-  const mapRef = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<HTMLCanvasElement>(null);
   const [scale, setScale] = useState(2.5); // meters per pixel
 
   // Draw on canvas
@@ -807,18 +807,20 @@ function AltitudeChart({ scoutTelemetry, sprayerTelemetry }: {
   scoutTelemetry: Telemetry | null;
   sprayerTelemetry: Telemetry | null;
 }) {
-  const [history, setHistory] = useState<Array<{
+  type AltitudePoint = {
     time: string;
-    scoutAlt: number;
-    sprayerAlt: number;
-  }>>([]);
+    scoutAlt: number | null;
+    sprayerAlt: number | null;
+  };
+
+  const [history, setHistory] = useState<AltitudePoint[]>([]);
 
   useEffect(() => {
     const scoutAlt = scoutTelemetry?.relative_alt ?? null;
     const sprayerAlt = sprayerTelemetry?.relative_alt ?? null;
     if (scoutAlt === null && sprayerAlt === null) return;
 
-    setHistory(prev => [...prev.slice(-59), {
+    setHistory((prev: AltitudePoint[]) => [...prev.slice(-59), {
       time: formatTime(Date.now() / 1000),
       scoutAlt,
       sprayerAlt,

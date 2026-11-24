@@ -116,6 +116,7 @@ class MockPhysics:
         self.battery_current = 0.0
         self.battery_capacity_mah = 10000
         self.battery_used_mah = 0.0
+        self.battery_remaining = 100.0
 
         # Random seed for deterministic noise
         self._rng = random.Random(42 if uav_type == UAVType.SCOUT else 43)
@@ -497,8 +498,13 @@ class FleetManager:
     def _init_mock(self):
         self.scout = MockPhysics(UAVType.SCOUT, self.home_lat, self.home_lon, self.home_alt)
         self.sprayer = MockPhysics(UAVType.SPRAYER, self.home_lat, self.home_lon, self.home_alt)
-        # Start mock physics loop
-        asyncio.create_task(self._mock_loop())
+        # Mock loop will be started by the FastAPI lifespan or explicitly via start_mock_loop()
+        self._mock_task: Optional[asyncio.Task] = None
+
+    async def start_mock_loop(self):
+        """Start the mock physics loop (must be called from async context)."""
+        if self.use_mock and self._mock_task is None:
+            self._mock_task = asyncio.create_task(self._mock_loop())
 
     def _init_real(self):
         self.scout = MAVLinkConnection(SystemIDs.SCOUT_SYSID, PORTS.SCOUT_MAVLINK_OUT)
