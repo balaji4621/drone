@@ -1,0 +1,38 @@
+{
+  "record_id": "AUDIT-81ED47ACA79F",
+  "section_id": "A-14",
+  "timestamp": "2026-11-24T13:50:03.551464+00:00",
+  "dock_state": "READY_FOR_SORTIE",
+  "survey_data": {
+    "section_id": "A-14",
+    "survey_timestamp": 1795528203.5404208,
+    "tiles_total": 169,
+    "tiles_infested": 8,
+    "hotspots": [],
+    "chemicals_recommended": []
+  },
+  "hotspots": [],
+  "tank_mix": {
+    "batch_id": "MIX-EMPTY-25B00EB5",
+    "chemicals": {},
+    "carrier_water_ml": 10000.0,
+    "surfactant_ml": 0,
+    "total_volume_ml": 10000.0,
+    "target_hotspots": [],
+    "mixed_at": 1795528203.5404208,
+    "phi_compliant_eu": true,
+    "phi_compliant_japan": true,
+    "mrl_verified": true,
+    "days_to_harvest": 14
+  },
+  "mrl_verification": {
+    "phi_compliant_eu": true,
+    "phi_compliant_japan": true,
+    "mrl_details": {},
+    "overall_compliant": true,
+    "checked_at": 1795528203.5514638
+  },
+  "compliance_status": "COMPLIANT",
+  "operator_id": "AUTO",
+  "signature": "5c53cb0c4004c45f"
+}

@@ -88,3 +88,17 @@ htmlcov/
 Thumbs.db
 *.tmp
 *.temp
+
+# Audit logs (generated at runtime)
+audit_logs/*.json
+audit_logs/*.csv
+!audit_logs/.gitkeep
+
+# Test/debug files
+backend/*.txt
+backend/test_*.txt
+backend/dock_test.txt
+backend/list_out.txt
+
+# Frontend lockfile (optional, but recommended for reproducible builds)
+frontend/package-lock.json
